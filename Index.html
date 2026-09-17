@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Green Brew Café | Vegetarian Café</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --green: #174d35;
+      --green-light: #2f7651;
+      --cream: #f8f4e9;
+      --white: #ffffff;
+      --dark: #17231d;
+      --muted: #68736c;
+      --gold: #c69b5b;
+      --shadow: 0 20px 60px rgba(23, 77, 53, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      color: var(--dark);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(248, 244, 233, 0.92);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: white;
+      font-size: 19px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background: var(--green);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-btn {
+      padding: 12px 20px;
+      background: var(--green);
+      color: white;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      background: var(--green-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      font-size: 28px;
+      color: var(--green);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding: 150px 7% 90px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .leaf {
+      position: absolute;
+      font-size: 50px;
+      opacity: 0.13;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .leaf-1 {
+      top: 20%;
+      left: 3%;
+    }
+
+    .leaf-2 {
+      bottom: 10%;
+      right: 45%;
+      animation-delay: 1s;
+    }
+
+    .leaf-3 {
+      top: 30%;
+      right: 4%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-18px) rotate(8deg);
+      }
+    }
+
+    .hero-content {
+      animation: heroText 1s ease forwards;
+    }
+
+    @keyframes heroText {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(47, 118, 81, 0.09);
+      color: var(--green);
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(55px, 7vw, 92px);
+      line-height: 0.95;
+      color: var(--green);
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero-text {
+      max-width: 530px;
+      line-height: 1.8;
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .primary-btn {
+      background: var(--green);
+      color: white;
+      border: 1px solid var(--green);
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 25px rgba(23, 77, 53, 0.25);
+    }
+
+    .secondary-btn {
+      border: 1px solid rgba(23, 77, 53, 0.25);
+      color: var(--green);
+    }
+
+    .secondary-btn:hover {
+      background: white;
+      transform: translateY(-4px);
+    }
+
+    /* HERO IMAGE */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      animation: imageReveal 1.2s ease forwards;
+    }
+
+    @keyframes imageReveal {
+      from {
+        opacity: 0;
+        transform: scale(0.85) rotate(4deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
+
+    .hero-circle {
+      width: min(500px, 80vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        linear-gradient(rgba(23,77,53,.08), rgba(23,77,53,.08)),
+        url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=85");
+      background-size: cover;
+      background-position: center;
+      border: 18px solid white;
+      box-shadow: var(--shadow);
+      animation: heroFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes heroFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .floating-card {
+      position: absolute;
+      bottom: 25px;
+      left: 0;
+      background: white;
+      padding: 16px 20px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      animation: cardFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes cardFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .rating {
+      color: var(--gold);
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .floating-card strong {
+      font-size: 14px;
+    }
+
+    /* GENERAL */
+    section {
+      padding: 100px 7%;
+    }
+
+    .section-heading {
+      max-width: 650px;
+      margin-bottom: 50px;
+    }
+
+    .section-heading.center {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .section-label {
+      color: var(--green-light);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .section-heading h2 {
+      font-family: "Playfair Display", serif;
+      color: var(--green);
+      font-size: clamp(38px, 5vw, 58px);
+      line-height: 1.05;
+      margin-bottom: 15px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* MENU */
+    .menu-section {
+      background: white;
+    }
+
+    .category-filter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      border: 1px solid #dfe5df;
+      background: white;
+      color: var(--muted);
+      border-radius: 30px;
+      padding: 10px 18px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--green);
+      color: white;
+      border-color: var(--green);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .food-card {
+      border-radius: 22px;
+      background: var(--cream);
+      overflow: hidden;
+      transition: 0.4s;
+    }
+
+    .food-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow);
+    }
+
+    .food-image {
+      height: 210px;
+      overflow: hidden;
+    }
+
+    .food-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s;
+    }
+
+    .food-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .food-info {
+      padding: 20px;
+    }
+
+    .food-info h3 {
+      color: var(--green);
+      margin-bottom: 7px;
+      font-size: 18px;
+    }
+
+    .food-info p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      min-height: 42px;
+    }
+
+    .food-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .price {
+      color: var(--green);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .add-btn {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: none;
+      background: var(--green);
+      color: white;
+      font-size: 20px;
+      transition: 0.3s;
+    }
+
+    .add-btn:hover {
+      transform: rotate(90deg);
+    }
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-images {
+      position: relative;
+      height: 530px;
+    }
+
+    .about-main {
+      width: 75%;
+      height: 80%;
+      object-fit: cover;
+      border-radius: 25px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-small {
+      position: absolute;
+      width: 48%;
+      height: 42%;
+      object-fit: cover;
+      right: 0;
+      bottom: 0;
+      border: 10px solid var(--cream);
+      border-radius: 22px;
+    }
+
+    .about-content h2 {
+      font-family: "Playfair Display", serif;
+      color: var(--green);
+      font-size: clamp(40px, 5vw, 58px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 18px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .feature-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: white;
+      border-radius: 50%;
+    }
+
+    /* STATS */
+    .stats {
+      background: var(--green);
+      color: white;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+      gap: 30px;
+    }
+
+    .stat h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 48px;
+      margin-bottom: 5px;
+    }
+
+    .stat p {
+      opacity: 0.75;
+      font-size: 13px;
+    }
+
+    /* TESTIMONIALS */
+    .reviews {
+      background: white;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .review-card {
+      padding: 30px;
+      background: var(--cream);
+      border-radius: 22px;
+      transition: 0.3s;
+    }
+
+    .review-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+    }
+
+    .review-stars {
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .review-card p {
+      color: #59635d;
+      line-height: 1.8;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+    }
+
+    .reviewer small {
+      display: block;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* VISIT */
+    .visit {
+      background:
+        linear-gradient(rgba(23,77,53,.92), rgba(23,77,53,.92)),
+        url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+    }
+
+    .visit h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(42px, 5vw, 65px);
+      margin-bottom: 15px;
+    }
+
+    .visit p {
+      max-width: 600px;
+      margin: auto;
+      opacity: 0.8;
+      line-height: 1.8;
+    }
+
+    .visit-details {
+      margin: 35px auto;
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .visit-detail strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .visit-detail span {
+      opacity: 0.75;
+      font-size: 13px;
+    }
+
+    .visit .primary-btn {
+      background: white;
+      color: var(--green);
+      border-color: white;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #102f22;
+      color: white;
+      padding: 60px 7% 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 50px;
+      padding-bottom: 45px;
+    }
+
+    footer .logo {
+      color: white;
+      margin-bottom: 18px;
+    }
+
+    .footer-about {
+      color: rgba(255,255,255,.65);
+      font-size: 14px;
+      line-height: 1.8;
+      max-width: 330px;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 18px;
+    }
+
+    .footer-col a,
+    .footer-col p {
+      display: block;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .footer-col a:hover {
+      color: white;
+    }
+
+    .copyright {
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      text-align: center;
+      color: rgba(255,255,255,.45);
+      font-size: 12px;
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: 0.8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* CART */
+    .cart {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      z-index: 900;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: none;
+      background: var(--green);
+      color: white;
+      font-size: 21px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.2);
+      transition: 0.3s;
+    }
+
+    .cart:hover {
+      transform: scale(1.08);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -3px;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: white;
+      font-size: 11px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1000px) {
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-text {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .hero-circle {
+        width: min(430px, 80vw);
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .about-images {
+        max-width: 600px;
+        width: 100%;
+        margin: auto;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .navbar {
+        padding: 16px 5%;
+      }
+
+      .nav-links,
+      .nav-btn {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links.open {
+        position: absolute;
+        top: 70px;
+        left: 5%;
+        right: 5%;
+        display: flex;
+        flex-direction: column;
+        background: white;
+        padding: 25px;
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 120px 5% 70px;
+        gap: 50px;
+      }
+
+      section {
+        padding: 75px 5%;
+      }
+
+      .menu-grid,
+      .review-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .food-image {
+        height: 250px;
+      }
+
+      .about-images {
+        height: 420px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        padding: 65px 5%;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .visit-details {
+        gap: 25px;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .floating-card {
+        left: 5px;
+        bottom: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="logo">
+      <span class="logo-icon">🌿</span>
+      Green Brew
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+
+    <a href="#visit" class="nav-btn">Book a Table</a>
+
+    <button class="menu-toggle" id="menuToggle">☰</button>
+  </nav>
+
+
+  <!-- HERO -->
+  <main id="home">
+    <section class="hero">
+
+      <span class="leaf leaf-1">🍃</span>
+      <span class="leaf leaf-2">🌿</span>
+      <span class="leaf leaf-3">🍃</span>
+
+      <div class="hero-content">
+        <div class="eyebrow">
+          🌱 100% Vegetarian Café
+        </div>
+
+        <h1>
+          Fresh.<br>
+          <span>Veg.</span><br>
+          Delicious.
+        </h1>
+
+        <p class="hero-text">
+          Welcome to Green Brew Café — a cozy vegetarian space where
+          fresh ingredients, delicious flavours and good vibes come together.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#menu" class="primary-btn">
+            Explore Menu →
+          </a>
+
+          <a href="#visit" class="secondary-btn">
+            Visit Us
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-circle"></div>
+
+        <div class="floating-card">
+          <div class="rating">★★★★★</div>
+          <strong>Loved by food lovers</strong>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+
+    <div class="section-heading center reveal">
+      <div class="section-label">Our Menu</div>
+      <h2>Made Fresh,<br>Served with Love.</h2>
+      <p>
+        Delicious vegetarian favourites prepared with fresh ingredients
+        and a little extra love.
+      </p>
+    </div>
+
+    <div class="category-filter reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="snacks">Snacks</button>
+      <button class="filter-btn" data-filter="pizza">Pizza</button>
+      <button class="filter-btn" data-filter="pasta">Pasta</button>
+      <button class="filter-btn" data-filter="drinks">Drinks</button>
+    </div>
+
+    <div class="menu-grid">
+
+      <article class="food-card reveal" data-category="pizza">
+        <div class="food-image">
+          <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=700&q=80" alt="Veg Pizza">
+        </div>
+        <div class="food-info">
+          <h3>Garden Veg Pizza</h3>
+          <p>Fresh vegetables, mozzarella & homemade sauce.</p>
+          <div class="food-bottom">
+            <span class="price">₹249</span>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="food-card reveal" data-category="pasta">
+        <div class="food-image">
+          <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=700&q=80" alt="Pasta">
+        </div>
+        <div class="food-info">
+          <h3>Creamy Veg Pasta</h3>
+          <p>Creamy sauce, herbs, vegetables & parmesan.</p>
+          <div class="food-bottom">
+            <span class="price">₹219</span>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="food-card reveal" data-category="snacks">
+        <div class="food-image">
+          <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=700&q=80" alt="Veg Sandwich">
+        </div>
+        <div class="food-info">
+          <h3>Classic Veg Sandwich</h3>
+          <p>Grilled bread, crisp vegetables & creamy dressing.</p>
+          <div class="food-bottom">
+            <span class="price">₹149</span>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="food-card reveal" data-category="drinks">
+        <div class="food-image">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=80" alt="Coffee">
+        </div>
+        <div class="food-info">
+          <h3>Signature Cappuccino</h3>
+          <p>Rich espresso with smooth steamed milk foam.</p>
+          <div class="food-bottom">
+            <span class="price">₹129</span>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section id="about">
+
+    <div class="about">
+
+      <div class="about-images reveal">
+        <img
+          class="about-main"
+          src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=85"
+          alt="Green Brew Cafe"
+        >
+
+        <img
+          class="about-small"
+          src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=600&q=80"
+          alt="Cafe interior"
+        >
+      </div>
+
+      <div class="about-content reveal">
+        <div class="section-label">Our Story</div>
+
+        <h2>A little greener.<br>A lot tastier.</h2>
+
+        <p>
+          Green Brew Café was created for people who believe that great food
+          doesn't need meat to be exciting.
+        </p>
+
+        <p>
+          From fresh vegetables and homemade sauces to carefully brewed coffee,
+          every plate is prepared to make your café experience memorable.
+        </p>
+
+        <div class="features">
+          <div class="feature">
+            <span class="feature-icon">🌱</span>
+            Fresh Ingredients
+          </div>
+
+          <div class="feature">
+            <span class="feature-icon">🥗</span>
+            100% Vegetarian
+          </div>
+
+          <div class="feature">
+            <span class="feature-icon">☕</span>
+            Freshly Brewed
+          </div>
+
+          <div class="feature">
+            <span class="feature-icon">❤️</span>
+            Made with Love
+          </div>
+        </div>
+
+        <a href="#menu" class="primary-btn">
+          Discover Our Menu →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- STATS -->
+  <section class="stats">
+
+    <div class="stat reveal">
+      <h3>100%</h3>
+      <p>Vegetarian</p>
+    </div>
+
+    <div class="stat reveal">
+      <h3>25+</h3>
+      <p>Menu Items</p>
+    </div>
+
+    <div class="stat reveal">
+      <h3>4.9</h3>
+      <p>Guest Rating</p>
+    </div>
+
+    <div class="stat reveal">
+      <h3>5K+</h3>
+      <p>Happy Guests</p>
+    </div>
+
+  </section>
+
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+
+    <div class="section-heading center reveal">
+      <div class="section-label">Guest Love</div>
+      <h2>What People Say</h2>
+      <p>
+        Good food brings people together. Here's what our guests think.
+      </p>
+    </div>
+
+    <div class="review-grid">
+
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+
+        <p>
+          “The ambience is beautiful and the food is genuinely delicious.
+          The veg pizza is definitely worth trying!”
+        </p>
+
+        <div class="reviewer">
+          <div class="avatar">A</div>
+          <div>
+            <strong>Aarav</strong>
+            <small>Food Lover</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+
+        <p>
+          “Loved the peaceful vibe and amazing coffee. Perfect place to
+          catch up with friends.”
+        </p>
+
+        <div class="reviewer">
+          <div class="avatar">S</div>
+          <div>
+            <strong>Simran</strong>
+            <small>Café Guest</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+
+        <p>
+          “Fresh food, friendly service and a really beautiful interior.
+          Green Brew has become my favourite café.”
+        </p>
+
+        <div class="reviewer">
+          <div class="avatar">R</div>
+          <div>
+            <strong>Rahul</strong>
+            <small>Regular Guest</small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- VISIT -->
+  <section class="visit" id="visit">
+
+    <div class="reveal">
+      <div class="section-label" style="color:#d9c28f;">
+        Come Say Hello
+      </div>
+
+      <h2>Your table is waiting.</h2>
+
+      <p>
+        Come for the food. Stay for the vibes.
+        We'd love to have you at Green Brew Café.
+      </p>
+
+      <div class="visit-details">
+
+        <div class="visit-detail">
+          <strong>📍 Location</strong>
+          <span>Your City, Maharashtra</span>
+        </div>
+
+        <div class="visit-detail">
+          <strong>🕐 Opening Hours</strong>
+          <span>10:00 AM – 11:00 PM</span>
+        </div>
+
+        <div class="visit-detail">
+          <strong>📞 Contact</strong>
+          <span>+91 98765 43210</span>
+        </div>
+
+      </div>
+
+      <a href="tel:+919876543210" class="primary-btn">
+        Call & Reserve →
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="footer-grid">
+
+      <div>
+        <div class="logo">
+          <span class="logo-icon">🌿</span>
+          Green Brew
+        </div>
+
+        <p class="footer-about">
+          Good Food. Green Choices. Great Moments.
+          A modern vegetarian café made for food, coffee and conversations.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <a href="#menu">Pizza</a>
+        <a href="#menu">Pasta</a>
+        <a href="#menu">Snacks</a>
+        <a href="#menu">Drinks</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>📍 Your City, Maharashtra</p>
+        <p>📞 +91 98765 43210</p>
+        <p>✉️ hello@greenbrew.com</p>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 Green Brew Café. Crafted with 🌿 & ❤️
+    </div>
+
+  </footer>
+
+
+  <!-- CART -->
+  <button class="cart" id="cart">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+
+
+  <script>
+
+    /* NAVBAR */
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 40) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+
+
+    /* MOBILE MENU */
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+      });
+    });
+
+
+    /* SCROLL REVEAL */
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    revealElements.forEach(element => {
+      revealObserver.observe(element);
+    });
+
+
+    /* MENU FILTER */
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const foodCards = document.querySelectorAll(".food-card");
+
+    filterButtons.forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        filterButtons.forEach(btn => {
+          btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        const filter = button.dataset.filter;
+
+        foodCards.forEach(card => {
+
+          if (filter === "all" || card.dataset.category === filter) {
+            card.style.display = "block";
+
+            setTimeout(() => {
+              card.style.opacity = "1";
+              card.style.transform = "translateY(0)";
+            }, 50);
+
+          } else {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(15px)";
+
+            setTimeout(() => {
+              card.style.display = "none";
+            }, 250);
+          }
+
+        });
+
+      });
+
+    });
+
+
+    /* CART */
+    let cartCount = 0;
+
+    const cartCounter = document.getElementById("cartCount");
+
+    document.querySelectorAll(".add-btn").forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        cartCount++;
+
+        cartCounter.textContent = cartCount;
+
+        button.textContent = "✓";
+
+        button.style.background = "#c69b5b";
+
+        setTimeout(() => {
+          button.textContent = "+";
+          button.style.background = "";
+        }, 900);
+
+      });
+
+    });
+
+
+    /* CART BUTTON */
+    document.getElementById("cart").addEventListener("click", () => {
+
+      if (cartCount === 0) {
+        alert("Your cart is empty 🌿");
+      } else {
+        alert(
+          `You have ${cartCount} item${cartCount > 1 ? "s" : ""} in your cart.`
+        );
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
